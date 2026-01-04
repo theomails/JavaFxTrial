@@ -2,16 +2,18 @@ plugins {
     id 'application'
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.beryx.jlink' version '3.0.1'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+    modularity.inferModulePath = true
 }
 
 group = 'com.vrrm'
-version = '1.0-SNAPSHOT'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -41,5 +43,37 @@ test {
 }
 
 application {
+    mainModule = 'com.vrrm.javafxtrial'
     mainClass = 'com.vrrm.Main'
+}
+
+jlink {
+    imageName = 'JavaFxTrial'
+
+    mergedModule {
+        requires 'java.logging';
+    }
+
+    options = [
+            '--strip-debug',
+            '--compress', '2',
+            '--no-header-files',
+            '--no-man-pages'
+    ]
+
+    launcher {
+        name = 'JavaFxTrial'
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [
+            '--add-reads', 'com.vrrm.javafxtrial=ALL-UNNAMED'  // Only needed for EventBus if it's non-modular
+    ]
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs += [
+            '--add-reads', 'com.vrrm.javafxtrial=ALL-UNNAMED'
+    ]
 }
