@@ -1,13 +1,12 @@
 package com.vrrm;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.vrrm.loginpanel.HomePane;
 import com.vrrm.loginpanel.LoginPane;
 import com.vrrm.util.AlertUtil;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 public class Main extends Application {
 
@@ -34,19 +33,19 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe
     public void handle(HomePane.HomeGoLoginEvent event) {
         paneStacker.pushPane(new LoginPane(childrenBus));
     }
 
     @SuppressWarnings("unused")
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe
     public void handle(LoginPane.LoginProceedEvent event) {
         paneStacker.popPane();
         AlertUtil.showInfo("Login success", null, "Will proceed to Authenticate with server..");
     }
     @SuppressWarnings("unused")
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe
     public void handle(LoginPane.LoginCancelEvent event) {
         paneStacker.popPane();
         AlertUtil.showInfo("Login aborted", null, "Going back..");

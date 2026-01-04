@@ -1,7 +1,7 @@
 package com.vrrm.loginpanel;
 
+import com.google.common.eventbus.EventBus;
 import javafx.scene.control.Button;
-import org.greenrobot.eventbus.EventBus;
 import org.tbee.javafx.scene.layout.MigPane;
 
 public class HomePane extends MigPane {

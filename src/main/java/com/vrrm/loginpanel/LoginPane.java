@@ -1,5 +1,6 @@
 package com.vrrm.loginpanel;
 
+import com.google.common.eventbus.EventBus;
 import com.vrrm.util.FormValidationUtil;
 import com.vrrm.util.FormValidationUtil.ValidationMessage;
 import com.vrrm.util.FormValidationUtil.ValidationMessageType;
@@ -10,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.Data;
-import org.greenrobot.eventbus.EventBus;
 import org.tbee.javafx.scene.layout.MigPane;
 
 import java.util.ArrayList;
